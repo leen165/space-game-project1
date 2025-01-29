@@ -1,6 +1,8 @@
 const ship = document.querySelector("#ship");
 const bulletsContainer = document.querySelector("#bullets");
-const obstaclesContainer = document.querySelector("#obstacles")
+const obstaclesContainer = document.querySelector("#obstacles");
+const playerScore = document.getElementById("score");
+let score = 0;
 let shipLeft = 0;
 let bulletTopPos = 700;
 
@@ -81,7 +83,7 @@ function creatObstacles() {
      
 
      //distroy the bullets
-       if(obstacleTop > 800 ){
+       if(obstacleTop >= 700 ){
         newObstacle.remove();
 
      //clear the interval
@@ -104,13 +106,15 @@ function ifCollision(bullet) {
             bulletPosition.bottom > obstaclePosition.top &&
             bulletPosition.left < obstaclePosition.right &&
             bulletPosition.right > obstaclePosition.left) {
-
+             
+              
            //removing the bullet and the obstacle
             bullet.remove();
             obstacle.remove();
             triggerExplosion(obstacle);
-
-        }
+            score ++;
+             playerScore.textContent ="your score : "+ score;  
+        } 
     });
 }
 
