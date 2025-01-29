@@ -42,18 +42,20 @@ function fire() {
     let bulletTop =  shipLocation.top  ;
 
     let timer = setInterval(() => {
-       bulletTop = bulletTop - 20;
+       bulletTop -= 20;
        newBullet.style.top = bulletTop + "px";
-       newBullet.style.display = "block";
+    // newBullet.style.display = "block";
      //distroy the bullets
        if(bulletTop < 0){
         newBullet.remove();
      //clear the interval
       clearInterval(timer);
-     }       
+     }  
+       ifCollision(newBullet);
+          
     },90);
-
 }
+
 function loadObs(){
     let obstacles = document.querySelectorAll(".obstacle");
     setInterval(() => {
@@ -66,7 +68,6 @@ function creatObstacles() {
 
     const newObstacle = document.createElement("div");
     newObstacle.className = "obstacle";
-    newObstacle.color = "red";
     newObstacle.style.left = Math.random() * (window.innerWidth - 50) + "px"; 
     //newObstacle.style.bottom = "100%"; 
     newObstacle.style.display = "block";
@@ -77,10 +78,12 @@ function creatObstacles() {
     let obstimer = setInterval(() => {
        obstacleTop = obstacleTop + 20;
        newObstacle.style.top = obstacleTop + "px";
-       newObstacle.style.display = "block";
+     
+
      //distroy the bullets
        if(obstacleTop > 800 ){
         newObstacle.remove();
+
      //clear the interval
       clearInterval(obstimer);
      }       
@@ -88,3 +91,41 @@ function creatObstacles() {
 
 
 }
+
+function ifCollision(bullet) {
+    const bulletPosition = bullet.getBoundingClientRect();
+    const allObstacles = document.querySelectorAll(".obstacle"); 
+    
+    allObstacles.forEach(obstacle => {
+        const obstaclePosition = obstacle.getBoundingClientRect();
+
+       //collision conditios
+        if (bulletPosition.top < obstaclePosition.bottom && 
+            bulletPosition.bottom > obstaclePosition.top &&
+            bulletPosition.left < obstaclePosition.right &&
+            bulletPosition.right > obstaclePosition.left) {
+
+           //removing the bullet and the obstacle
+            bullet.remove();
+            obstacle.remove();
+            triggerExplosion(obstacle);
+
+        }
+    });
+}
+
+   
+   
+   function triggerExplosion(obstacle) {
+       const explosion = document.createElement("div");
+       explosion.className = "explosion";
+       explosion.style.left = obstacle.style.left;
+       explosion.style.top = obstacle.style.top;
+       //i hade to append it to the body so that it will show
+       document.body.appendChild(explosion);
+   
+       setTimeout(() => {
+           explosion.remove();
+       }, 500);
+   }
+   
