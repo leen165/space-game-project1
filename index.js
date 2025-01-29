@@ -46,7 +46,7 @@ function fire() {
        newBullet.style.top = bulletTop + "px";
        newBullet.style.display = "block";
      //distroy the bullets
-       if(bulletTop == -2000){
+       if(bulletTop < 0){
         newBullet.remove();
      //clear the interval
       clearInterval(timer);
@@ -56,11 +56,11 @@ function fire() {
 }
 function loadObs(){
     let obstacles = document.querySelectorAll(".obstacle");
-    while(obstacles.length < 5 ){
-        //add an obstacle to the list 
-        creatObstacles();
-       obstacles ++;
-    } 
+    setInterval(() => {
+        if (obstacles.length < 5) {
+            creatObstacles();
+        }
+    }, 1000); 
 }
 function creatObstacles() {
 
