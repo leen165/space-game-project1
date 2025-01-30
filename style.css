@@ -25,16 +25,14 @@
 }
 
 .obstacle {
-  width: 100px;
-  height: 100px;
-  background-image: url('./vecteezy_pink-planet-cartoon_47591903.png'); 
+  width: 80px;
+  height: 80px;
+  background-image: url("./images/vecteezy_pink-planet-cartoon_47591903.png");
   background-size: cover;
   background-position: center;
   position: fixed;
   display: none;
 }
-
-
 
 .explosion {
   position: absolute;
@@ -47,27 +45,78 @@
 
 @keyframes explode {
   0% {
-      transform: scale(1);
-      opacity: 1;
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2.5);
+    opacity: 0.6;
   }
   100% {
-      transform: scale(2);
-      opacity: 0;
+    transform: scale(3);
+    opacity: 0;
   }
 }
+
 #score {
   position: absolute;
   top: 20px;
   left: 20px;
-  font-size: 24px;
+  font-size: 30px;
   color: whitesmoke;
   box-shadow: 0 0 10px #f78cfa, 0 0 20px #e35bbf, 0 0 30px #fd5ac1;
-  font-family: 'Lucida Handwriting', cursive;
+  font-family: "Lucida Handwriting", cursive;
   /*z-index: 10;*/
 }
- 
+#game-over-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:url(./images/Free-Space-BG.jpg);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
 
- 
+h1 {
+  font-family:  "Lucida Handwriting", cursive;
+  color: rgb(252, 27, 188);
+  box-shadow: 0 0 10px #f78cfa, 0 0 20px #e35bbf, 0 0 30px #fd5ac1;
+}
+
+span{
+
+  font-family:  "Lucida Handwriting", cursive;
+  color: rgb(252, 27, 188);
+  box-shadow: 0 0 10px #f78cfa, 0 0 20px #e35bbf, 0 0 30px #fd5ac1; 
+  font-size : 30px;
+}
+
+#restart-button{
+  font-family:  "Lucida Handwriting", cursive;
+  color: black;
+  box-shadow: 0 0 10px #f78cfa, 0 0 20px #e35bbf, 0 0 30px #fd5ac1; 
+  font-size : 25px;
+
+}
+
+.hidden {
+  display: none;
+}
+
+#gameoverimg1,
+#gameoverimg2 {
+  width: 200px;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 section {
   position: relative;
   width: 100%;
@@ -89,37 +138,37 @@ section .star {
 }
 section .star.star1 {
   animation-delay: 0s;
-  background: url(star1.png);
+  background: url(./images/star1.png);
 }
 
 section .star.star3 {
   animation-delay: -2s;
-  background: url(star3.png);
+  background: url(./images/star3.png);
 }
 
 section .star.star4 {
   animation-delay: -3s;
-  background: url(star4.png);
+  background: url(./images/star4.png);
 }
 
 section .star.star5 {
   animation-delay: -4s;
-  background: url(star5.png);
+  background: url(./images/star5.png);
 }
 
 section .star.star6 {
   animation-delay: -5s;
-  background: url(star6.png);
+  background: url(./images/star6.png);
 }
 
 section .star.star7 {
   animation-delay: -6s;
-  background: url(star7.png);
+  background: url(./images/star7.png);
 }
 
 section .star.star8 {
   animation-delay: -7s;
-  background: url(star8.png);
+  background: url(./images/star8.png);
 }
 @keyframes animate {
   0%,
