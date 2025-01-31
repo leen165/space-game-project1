@@ -68,6 +68,17 @@
   font-family: "Lucida Handwriting", cursive;
   /*z-index: 10;*/
 }
+
+#lives{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 25px;
+  color: whitesmoke;
+  box-shadow: 0 0 10px #f78cfa, 0 0 20px #e35bbf, 0 0 30px #fd5ac1;
+  font-family: "Lucida Handwriting", cursive;
+}
+
 #game-over-content {
   position: fixed;
   top: 0;
@@ -75,6 +86,8 @@
   width: 100%;
   height: 100%;
   background:url(./images/Free-Space-BG.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   color: white;
   display: flex;
   justify-content: center;
@@ -109,12 +122,39 @@ span{
   display: none;
 }
 
-#gameoverimg1,
 #gameoverimg2 {
   width: 200px;
   height: auto;
   margin-top: 20px;
   margin-bottom: 20px;
+  animation: slide1 3s linear infinite alternate;
+}
+
+#gameoverimg1{
+  width: 200px;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  animation: slide2 3s linear infinite alternate;
+}
+
+@keyframes slide1 {
+  0%{
+    transform: translateX(-100px);
+  }
+  100%{
+    transform: translateX(100px);
+  }
+  
+}
+@keyframes slide2 {
+  0%{
+    transform: translateX(100px);
+  }
+  100%{
+    transform: translateX(-100px);
+  }
+  
 }
 
 section {
