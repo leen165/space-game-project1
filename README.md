@@ -16,7 +16,7 @@ Obstacles: Avoid the falling planets, or it’s game over.
 Move: use your mouse to move the ship.
 
 Shoot: use space button to shoot.
-
+<a href="https://leen165.github.io/space-game-project1/">Click here to play!</a>
 
 HAVE FUN playing!
 thank you for being here! <3
