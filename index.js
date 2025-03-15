@@ -1,21 +1,25 @@
 const ship = document.querySelector("#ship");
+const musicPlayButton= document.querySelector("#music-button");
 const bulletsContainer = document.querySelector("#bullets");
 const obstaclesContainer = document.querySelector("#obstacles");
 const playerScore = document.getElementById("score");
+const playerLives = document.getElementById("lives");
 let score = 0;
 let shipLeft;
 let bulletTopPos = 700;
 let obstIntervalCreat;
+let liveInterval;
 let goSound = new Audio("game-over-arcade-6435.mp3");
 let startSound = new Audio("game-music-loop-7-145285.mp3");
-
+const speakerImg = document.querySelector("img");
+let isMusicPlaying = false;
 
 // to move the space ship
 window.addEventListener("mousemove", function (movement) {
     shipLeft = Math.min(window.innerWidth - ship.offsetWidth, movement.x);
 
     ship.style.left = shipLeft + "px";
-    
+
 });
 
 //creat shooting with space botton
@@ -35,6 +39,20 @@ window.addEventListener("load", function () {
 
 });
 
+musicPlayButton.addEventListener("click",function(){
+if(isMusicPlaying){
+
+    startSound.pause();
+    speakerImg.src = "./images/mute.png";
+}else{
+
+    startSound.play();
+    startSound.loop=true;
+    speakerImg.src = "./images/audio.png";
+}
+isMusicPlaying = !isMusicPlaying;
+});
+
 function fire() {
     const shipLocation = ship.getBoundingClientRect();
     const newBullet = document.createElement("div");
@@ -43,7 +61,7 @@ function fire() {
     newBullet.style.display = "block";
     newBullet.style.left =
         shipLocation.left + shipLocation.width / 2 - 2.5 + "px";
-    // newBullet.style.top = bulletTop + "px";
+
 
     let bulletTop = shipLocation.top;
 
@@ -73,20 +91,17 @@ function loadObs() {
 }
 
 function creatObstacles() {
-    if(creatObstacles){
-        startSound.play();
-    }
+
     const newObstacle = document.createElement("div");
     newObstacle.className = "obstacle";
     newObstacle.style.left = Math.random() * (window.innerWidth - 50) + "px";
-    //newObstacle.style.bottom = "100%";
     newObstacle.style.display = "block";
     obstaclesContainer.appendChild(newObstacle);
 
     let obstacleTop = 0;
     let speed = 1;
     let obstimer = setInterval(() => {
-        speed = Math.floor(Math.random() * (80 - 5 + 1));
+        speed = Math.floor(Math.random() * (60 - 2 +1));
         obstacleTop = obstacleTop + speed;
         newObstacle.style.top = obstacleTop + "px";
 
@@ -103,6 +118,7 @@ function creatObstacles() {
 }
 
 function ifCollision(bullet) {
+
     const bulletPosition = bullet.getBoundingClientRect();
     const allObstacles = document.querySelectorAll(".obstacle");
 
@@ -140,35 +156,40 @@ function triggerExplosion(obstacle) {
 }
 
 function ifCollisionWithShip() {
+
     const shipPosition = ship.getBoundingClientRect();
     const allObstacles = document.querySelectorAll(".obstacle");
 
     allObstacles.forEach((obstacle) => {
         const obstaclePosition = obstacle.getBoundingClientRect();
 
+
         if (
             shipPosition.top < obstaclePosition.bottom &&
             shipPosition.bottom > obstaclePosition.top &&
             shipPosition.left < obstaclePosition.right &&
-            shipPosition.right > obstaclePosition.left
-        ) {
-            gameOver();
-        }
+            shipPosition.right > obstaclePosition.left) {
+
+                gameOver();
+            }
+
     });
+
 }
 
 function gameOver() {
     if (gameOver) {
         startSound.pause();
+        startSound.currentTime = 0; 
         goSound.play();
-        
+
     }
 
     const gameOverScreen = document.getElementById("game-over-wrapper");
     gameOverScreen.classList.remove("hidden");
 
     const finalScore = document.getElementById("final-score");
-    finalScore.textContent = `your score is: ${score}`;
+    finalScore.textContent = `your score is: ${score};`
 
     clearInterval(obstIntervalCreat);
 
@@ -189,13 +210,14 @@ function restartGame() {
     score = 0;
     playerScore.textContent = "Your score: 0";
     loadObs();
-    if(restartGame){
-    startSound.play();
+    if (restartGame) {
+        startSound.play();
+        startSound.currentTime = 0; 
     }
     // Show the ship
     const ship = document.querySelector("#ship");
     ship.style.display = "block";
-
+    speakerImg.src="./images/audio.png";
     // Clear all obstacles and bullets
     obstaclesContainer.innerHTML = "";
     bulletsContainer.innerHTML = "";
