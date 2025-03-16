@@ -1,5 +1,5 @@
 const ship = document.querySelector("#ship");
-const musicPlayButton= document.querySelector("#music-button");
+const musicPlayButton= document.querySelector(".music-button");
 const bulletsContainer = document.querySelector("#bullets");
 const obstaclesContainer = document.querySelector("#obstacles");
 const playerScore = document.getElementById("score");
@@ -11,8 +11,20 @@ let obstIntervalCreat;
 let liveInterval;
 let goSound = new Audio("game-over-arcade-6435.mp3");
 let startSound = new Audio("game-music-loop-7-145285.mp3");
-const speakerImg = document.querySelector("img");
+const speakerImg = document.querySelector("#speaker");
 let isMusicPlaying = false;
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const startScreen = document.getElementById("start-screen");
+    const startButton = document.getElementById("start-button");
+
+    startButton.addEventListener("click", function () {
+        startScreen.style.display = "none";
+        startSound.play(); 
+    });
+});
+ 
 
 // to move the space ship
 window.addEventListener("mousemove", function (movement) {
@@ -41,7 +53,6 @@ window.addEventListener("load", function () {
 
 musicPlayButton.addEventListener("click",function(){
 if(isMusicPlaying){
-
     startSound.pause();
     speakerImg.src = "./images/mute.png";
 }else{
@@ -189,7 +200,7 @@ function gameOver() {
     gameOverScreen.classList.remove("hidden");
 
     const finalScore = document.getElementById("final-score");
-    finalScore.textContent = `your score is: ${score};`
+    finalScore.textContent = `your score is: ${score}`
 
     clearInterval(obstIntervalCreat);
 
@@ -225,4 +236,5 @@ function restartGame() {
     // Hide the game-over screen
     const gameOverScreen = document.getElementById("game-over-wrapper");
     gameOverScreen.classList.add("hidden");
+    startGame(); 
 }
