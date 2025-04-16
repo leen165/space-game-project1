@@ -51,18 +51,24 @@ window.addEventListener("load", function () {
 
 });
 
-musicPlayButton.addEventListener("click",function(){
-if(isMusicPlaying){
-    startSound.pause();
-    speakerImg.src = "./images/mute.png";
-}else{
-
-    startSound.play();
-    startSound.loop=true;
-    speakerImg.src = "./images/audio.png";
+function toggleMusic() {
+    if (isMusicPlaying) {
+        startSound.pause();
+        speakerImg.src = "./images/mute.png";
+    } else {
+        startSound.play();
+        startSound.loop = true;
+        speakerImg.src = "./images/audio.png";
+    }
+    isMusicPlaying = !isMusicPlaying;
 }
-isMusicPlaying = !isMusicPlaying;
+musicPlayButton.addEventListener("click", toggleMusic);
+document.addEventListener("keydown", function (event) {
+    if (event.key === "m" || event.key === "M") {
+        toggleMusic();
+    }
 });
+
 
 function fire() {
     const shipLocation = ship.getBoundingClientRect();
