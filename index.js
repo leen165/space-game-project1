@@ -236,5 +236,5 @@ function restartGame() {
     // Hide the game-over screen
     const gameOverScreen = document.getElementById("game-over-wrapper");
     gameOverScreen.classList.add("hidden");
-    startGame(); 
+
 }
